@@ -1,3 +1,3 @@
-public class weatherSystem {
+public class WeatherSystem {
     
 }

@@ -1,5 +1,5 @@
 package logic;
 
-public class vision {
+public class Vision {
     
 }

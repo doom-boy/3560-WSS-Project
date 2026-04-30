@@ -1,3 +1,5 @@
+import map.Position;
+
 public class Player {
     private int maxMovement;
     private int maxFood;

@@ -11,10 +11,10 @@
 Object Oriented Final Project 
 
 ### Requirements:
-- 5 terrains types
-- 2 trader types
-- 4 visions types
-- 3 brain types
+- 5 terrains types (plains, mountains, desert, swamp, forest)
+- 2 trader types (generous, greedy)
+- 4 visions types (cautious, keenEye, Farsight, Focused)
+- 3 brain types (Hoarder, Cautious, Focused)
 - video/text output of program
 
 - Demonstrate heirarchy, inheritance, polymorphism, encapsulation, abstraction, good code commenting

@@ -1,5 +1,7 @@
 import map.Position;
 
+// need tile, vision, brain
+
 public class Player {
     private int maxMovement;
     private int maxFood;

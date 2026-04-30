@@ -9,6 +9,8 @@ public class Position {
         this.y = y;
     }
 
+    
+    // getters n setters
     public int getX() {
         return x;
     }

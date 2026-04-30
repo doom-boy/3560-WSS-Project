@@ -12,9 +12,17 @@ public abstract class Terrain {
         this.waterCost = waterCost;
     }
 
-    public int getMovementCost() { return movementCost; }
-    public int getFoodCost()     { return foodCost; }
-    public int getWaterCost()    { return waterCost; }
+    //getters
+    public int getMovementCost() { 
+        return movementCost; 
+    }
+    public int getFoodCost()     { 
+        return foodCost; 
+    }
+    public int getWaterCost()    { 
+        return waterCost; 
+    }
 
+    // for sub terrains; when acc defined
     public abstract String getType();
 }

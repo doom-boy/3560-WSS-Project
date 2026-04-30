@@ -1,6 +1,7 @@
 package map;
 
 public class Plain extends Terrain {
+    // returns this if called
     private String type = "Plain";
 
     // Low cost traversal, sorta like base terrain
@@ -9,5 +10,7 @@ public class Plain extends Terrain {
     }
 
     @Override
-    public String getType() { return type; }
+    public String getType() { 
+        return type; 
+    }
 }

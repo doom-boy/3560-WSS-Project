@@ -1,8 +1,10 @@
+package app;
 // main.java
 
 import map.Map;
 import map.Position;
 import map.WeatherSystem;
+import player.Player;
 import logic.Brain;
 import logic.Vision;
 import event.Event;

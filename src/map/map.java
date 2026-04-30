@@ -78,6 +78,7 @@ public class Map {
 
 
 
+    //event picked randomly, 1 of 3
     private Event randomEvent() {
         int roll = rng.nextInt(3);
         switch (roll) {
@@ -110,10 +111,23 @@ public class Map {
         return height;
     }
 
-
-
-
     //getTile
+    public Tile getTile(Position pos) {
+        if (pos.getX() < 0 || pos.getX() >= width) return null;
+        if (pos.getY() < 0 || pos.getY() >= height) return null;
+        return grid[pos.getY()][pos.getX()];
+    }
+
+
+    // Native indexing: grid[3][2] = position (2,3); for debug
+    public Tile getTileRaw(int row, int col) {
+        return grid[row][col];
+    }
+
+
+
+
+    
     
 }
 

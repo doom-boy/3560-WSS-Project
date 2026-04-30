@@ -1,7 +1,12 @@
 package event;
 
-public class Event {
-    
+public abstract class Event {
+    protected boolean isRepeating;
+    protected boolean encountered;
+
+    public Event() {
+        
+    }
 }
 
 /**

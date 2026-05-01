@@ -1,5 +1,6 @@
 package player;
 import map.Position;
+import map.Tile;
 
 // need tile, vision, brain
 

@@ -1,4 +1,4 @@
-package map;
+package map.terrain;
 
 public class Plain extends Terrain {
     // returns this if called

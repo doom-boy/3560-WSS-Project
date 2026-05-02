@@ -6,8 +6,8 @@ import map.Position;
 import map.Tile;
 import map.WeatherSystem;
 import player.Player;
-import logic.Brain;
-import logic.Vision;
+import logic.brain.Brain;
+import logic.vision.Vision;
 import event.Event;
 
 // need brain, vision, weather, tile, map, event

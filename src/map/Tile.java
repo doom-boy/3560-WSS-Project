@@ -1,6 +1,7 @@
 package map;
 
 import event.Event;
+import map.terrain.Terrain;
 
 public class Tile {
 

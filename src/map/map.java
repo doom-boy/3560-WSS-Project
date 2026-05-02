@@ -5,6 +5,8 @@ import java.util.Random;
 import event.Event;
 import event.GoldBonus;
 import event.WaterBonus;
+import map.terrain.Plain;
+import map.terrain.Terrain;
 import event.FoodBonus;
 import event.GenerousTrader;
 import event.GreedyTrader;

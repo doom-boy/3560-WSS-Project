@@ -1,4 +1,4 @@
-package map;
+package map.terrain;
 
 // Abstract, b/c subclasses define diff terrain typs
 public abstract class Terrain {

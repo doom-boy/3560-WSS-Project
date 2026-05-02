@@ -4,6 +4,10 @@ import java.util.Random;
 
 import event.Event;
 import event.GoldBonus;
+import event.WaterBonus;
+import event.FoodBonus;
+import event.GenerousTrader;
+import event.GreedyTrader;
 
 import java.util.ArrayList;
 import java.util.List;

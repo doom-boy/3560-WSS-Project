@@ -81,8 +81,31 @@ public abstract class Trader extends Event {
         return stock;
     }
 
-    //needs brain to do interact here
-    public void trigger(Player player) {}
-}
 
-// has to be abstract for the generous and greedy trader implementation
+
+    //needs brain to do interact here
+    @Override
+    public void trigger(Player player) {
+        if (patience <= 0) {
+            System.out.println("Trader refuses to deal.");
+            return;
+        }
+
+        // Full trade dialogue driven externally by Brain (placeholder)
+        // Brain.conductTrade(player, this) ///////////////////
+        int[] offer = showTradeOption();
+        System.out.printf("Trader Offers: food=%d water=%d gold=%d%n", offer[0], offer[1], offer[2]);
+        
+        // Brain response placeholder (auto-no for now) //////////
+        System.out.println("[Trader] No negotiation. Trade skipped.");
+
+
+    }
+
+
+
+
+
+
+
+}

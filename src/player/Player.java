@@ -40,9 +40,9 @@ public class Player {
         this.currGold     = 0;
     }
 
-    // Called at top of each turn iteration
-    public void regenerateMovement() {
-        currMovement = maxMovement;
+    // regains 2 movement after each rest on tile
+    public void rest() {
+        currMovement = Math.min(maxMovement, currMovement + 2);
     }
 
     public void makeMove(Tile target) {

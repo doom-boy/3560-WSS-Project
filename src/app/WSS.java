@@ -8,6 +8,9 @@ import map.WeatherSystem;
 import player.Player;
 import logic.brain.Brain;
 import logic.vision.Vision;
+
+import java.util.Scanner;
+
 import event.Event;
 
 // need brain, vision, weather, tile, map, event
@@ -34,28 +37,32 @@ public class WSS {
         this.turnCount = 0;
     }
 
-    public void init() {
-        generateMap(difficulty);
-        Position start = new Position(0, map.getHeight() / 2);
-        // Brain/Vision placeholders, nulls for now
-        player = new Player(start, null, null);
-    }
+    // public void init() {
+    //     generateMap(difficulty);
+    //     Position start = new Position(0, map.getHeight() / 2);
+    //     // Brain/Vision placeholders, nulls for now
+    //     player = new Player(start, null, null);
+    // }
 
-    public void generateMap(int difficulty) {
-        int size;
-        switch (difficulty) {
-            case 0: size = 15; break;
-            case 2: size = 50; break;
-            default: size = 30;
-        }
-        map = new Map(size, size, difficulty);
+    public void generateMap(int mapSize) {
+        // difficulty derived from size; <20 = easy, <40=normal, else hard
+        this.difficulty = mapSize < 20 ? 0 : mapSize < 40 ? 1 : 2;
+        map = new Map(mapSize, mapSize, difficulty);
         map.generate();
     }
 
     
     // simplied win/lose con check for alive
     public void run() {
-        init();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter map size (e.g. 15, 30, 50): ");
+        int size = sc.nextInt();
+        generateMap(size);
+        Position start = new Position(0, map.getHeight() / 2);
+        player = new Player(start, null, null);
+        // init() replaced by inline setup
+//  above
         while (true) {
             boolean alive = takeTurn();
             if (!alive) {
@@ -98,15 +105,15 @@ public class WSS {
                 player.applyTileCost(current);
             }
         } else {
-            // stay on tile; half tile stat cost
+            // resting: regain 2 movement, half food/water cost
++            player.rest();
             Tile current = map.getTile(player.getPosition());
             if (current != null) {
                 player.applyHalfTileCost(current);
             }
         }
 
-        //Update player stats & check alive
-        player.regenerateMovement();
+        //print stats
         printPlayerStats();
 
         // CHECK lose cons
@@ -120,17 +127,14 @@ public class WSS {
             return true; // win handled in run()
         }
 
-        //Get tile events
+        //Get tile events; one event interaction per turn
         if (tile != null && tile.getEvent() != null) {
             Event event = tile.getEvent();
-            ///////////////////////////////////////////////////////////
-            // Brain considers event - placeholder
-            boolean interact = true; // Brain.considerEvent() will decide
-
-            if (interact) {
-                event.trigger(player);
-                if (!event.isRepeating()) {
-                    event.setEncountered(true); // need in events
+            if (event.isAvailable()) {
+                boolean interact = true; // Brain.considerEvent() will decide
+                if (interact) {
+                    event.trigger(player);
+                    if (!event.isRepeating()) event.setEncountered(true);
                 }
             }
         }

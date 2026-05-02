@@ -13,6 +13,8 @@ import player.Player;
  * 
  * Generous trader will offer more for less and have higher patience. 
  * Greedy trader is opposite. 
+ * 
+ * 
  */
 
 public abstract class Trader extends Event {
@@ -35,9 +37,40 @@ public abstract class Trader extends Event {
      * 
      */
 
+    // gives trader's opening offer [resourceType, amount]
+    // resourceType: 0=food, 1=water, 2=gold
+    public abstract int[] showTradeOption();
+
+    // Player give their offer/counteroffer; returns trader's response
+    // response: 0=accept, 1=counteroffer, 2=reject
+    public abstract int[] makeOffer(int[] playerOffer);
+
+    //finalize trade if player accepts; give "true" if trade went through
+    public boolean confirmTrade(Player player, int[] agreedOffer) {
+        if (patience <= 0) {
+            System.out.println("[Trader] Trader has lost patience and left.");
+            return false;
+        }
+        applyTrade(player, agreedOffer);
+        return true;
+    }
+
+
+
+    protected void applyTrade(Player player, int[] offer) {
+        // format for offer: [give_food, give_water, give_gold, get_food, get_water, get_gold]
+        player.addFood(-offer[0]); //taken from plyer
+        player.addWater(-offer[1]); // ^^
+        player.addGold(-offer[2]);  // ^^
+        player.addFood(offer[3]);
+        player.addWater(offer[4]);
+        player.addGold(offer[5]);
+    }
+
 
     public void decrementPatience() {
         patience--;
+        // JUst for debug, can remove later if wanted
         System.out.println("[Trader] Patience remaining: " + patience);
     }
 
@@ -48,6 +81,7 @@ public abstract class Trader extends Event {
         return stock;
     }
 
+    //needs brain to do interact here
     public void trigger(Player player) {}
 }
 

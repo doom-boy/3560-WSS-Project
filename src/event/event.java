@@ -1,6 +1,13 @@
 package event;
 import player.Player;
 
+/**
+ * 
+ * CORRECTION:
+ * player can only interact with 1 event per turn
+ * 
+ */
+
 public abstract class Event {
     protected boolean isRepeating;
     protected boolean encountered;

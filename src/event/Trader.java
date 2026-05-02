@@ -17,6 +17,12 @@ import player.Player;
  * 
  */
 
+/**
+ * Player can't know what type of trader it is
+ * might want to have patience slowly regenerate after amt of turns have passed, maybe stock too but at a slow rate
+ * 
+ */
+
 public abstract class Trader extends Event {
 
     protected int[] stock;   // resource #'s [food, water, gold]
@@ -95,7 +101,7 @@ public abstract class Trader extends Event {
         // Brain.conductTrade(player, this) ///////////////////
         int[] offer = showTradeOption();
         System.out.printf("Trader Offers: food=%d water=%d gold=%d%n", offer[0], offer[1], offer[2]);
-        
+
         // Brain response placeholder (auto-no for now) //////////
         System.out.println("[Trader] No negotiation. Trade skipped.");
 

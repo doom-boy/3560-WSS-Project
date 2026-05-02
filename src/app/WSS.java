@@ -12,6 +12,13 @@ import event.Event;
 
 // need brain, vision, weather, tile, map, event
 
+/**
+ * 
+ * Correction:
+ * ask user for map size instead of prompting difficulty; difficulty to determine map gen
+ * 
+ */
+
 public class WSS {
 
     private int turnCount; //start @ 0 and iteratively grow each cycle

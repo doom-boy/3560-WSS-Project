@@ -4,6 +4,13 @@ import map.Tile;
 
 // need tile, vision, brain
 
+/**
+ * Correction:
+ *  make movement generation a slow recover process, regain 2 per "rest", not full regain
+ * 
+ *  */
+
+
 public class Player {
     private int maxMovement;
     private int maxFood;

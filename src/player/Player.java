@@ -78,16 +78,36 @@ public class Player {
     }
 
     // getters
-    public Position getPosition()  { return position; }
-    public int getMaxMovement()    { return maxMovement; }
-    public int getMaxFood()        { return maxFood; }
-    public int getMaxWater()       { return maxWater; }
-    public int getCurrMovement()   { return currMovement; }
-    public int getCurrFood()       { return currFood; }
-    public int getCurrWater()      { return currWater; }
-    public int getCurrGold()       { return currGold; }
+    public Position getPosition() {
+        return position; 
+    }
+    public int getMaxMovement() {
+        return maxMovement; 
+    }
+    public int getMaxFood() {
+        return maxFood; 
+    }
+    public int getMaxWater() { 
+        return maxWater; 
+    }
+    public int getCurrMovement() { 
+        return currMovement;
+    }
+    public int getCurrFood() {
+        return currFood;
+    }
+    public int getCurrWater() { 
+        return currWater; 
+    }
+    public int getCurrGold() { 
+        return currGold; 
+    }
 
     // Setters for Brain tuning; if needed, can delete lateron
-    public void setPosition(Position p)  { this.position = p; }
-    public void setCurrMovement(int v)   { this.currMovement = v; }
+    public void setPosition(Position p) { 
+        this.position = p;
+    }
+    public void setCurrMovement(int v) {
+        this.currMovement = v;
+    }
 }

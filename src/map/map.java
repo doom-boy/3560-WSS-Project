@@ -78,7 +78,7 @@ public class Map {
 
 
 
-    //event picked randomly, 1 of 3
+    //event picked randomly, 1 of 4 //TODO: need to add in food bonus
     private Event randomEvent() {
         int roll = rng.nextInt(3);
         switch (roll) {
@@ -103,7 +103,7 @@ public class Map {
 
 
 
-    public int getWidth()  {
+    public int getWidth() {
         return width;
     }
 

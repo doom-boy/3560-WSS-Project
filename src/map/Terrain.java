@@ -16,10 +16,10 @@ public abstract class Terrain {
     public int getMovementCost() { 
         return movementCost; 
     }
-    public int getFoodCost()     { 
+    public int getFoodCost() { 
         return foodCost; 
     }
-    public int getWaterCost()    { 
+    public int getWaterCost() { 
         return waterCost; 
     }
 

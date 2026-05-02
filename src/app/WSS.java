@@ -3,6 +3,7 @@ package app;
 
 import map.Map;
 import map.Position;
+import map.Tile;
 import map.WeatherSystem;
 import player.Player;
 import logic.Brain;

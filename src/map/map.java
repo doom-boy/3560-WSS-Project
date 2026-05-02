@@ -55,30 +55,29 @@ public class Map {
 
     //how to acc set the events to each 
     private void placeEvents() {
-    double rate = EVENT_RATES[difficulty];
-    int minE = MIN_EVENTS[difficulty];
-    int maxE = MAX_EVENTS[difficulty];
+        double rate = EVENT_RATES[difficulty];
+        int minE = MIN_EVENTS[difficulty];
+        int maxE = MAX_EVENTS[difficulty];
 
-    //collect eligible tiles (skip start column)
-    List<Tile> eligible = new ArrayList<>();
-    for (int y = 0; y < height; y++) {
-        for (int x = 1; x < width; x++) {
-            eligible.add(grid[y][x]);
+        //collect eligible tiles (skip start column)
+        List<Tile> eligible = new ArrayList<>();
+        for (int y = 0; y < height; y++) {
+            for (int x = 1; x < width; x++) {
+                eligible.add(grid[y][x]);
+            }
+        }
+
+        // Shuffle so placement isn't biased toward top-left
+        java.util.Collections.shuffle(eligible, rng);
+
+        // Desired count from rate, between min Event n max Event (for overall)
+        int desired = (int)(eligible.size() * rate);
+        int count = Math.max(minE, Math.min(maxE, desired));
+
+        for (int i = 0; i < count; i++) {
+            eligible.get(i).setEvent(randomEvent());
         }
     }
-
-    // Shuffle so placement isn't biased toward top-left
-    java.util.Collections.shuffle(eligible, rng);
-
-    // Desired count from rate, between min Event n max Event (for overall)
-    int desired = (int)(eligible.size() * rate);
-    int count = Math.max(minE, Math.min(maxE, desired));
-
-    for (int i = 0; i < count; i++) {
-        eligible.get(i).setEvent(randomEvent());
-    }
-
-
 
 
 

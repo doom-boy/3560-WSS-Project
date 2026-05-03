@@ -29,9 +29,7 @@ public class WSS {
     private Player player;
     private Map map;  //need to build out
     
-    ///////////////////////////////////////////////////////////////////////////
-    // need to properly implement WeatherSystme
-    private Object weatherSystem; // WeatherSystem placeholder
+    private WeatherSystem weatherSystem;
 
     // difficulty: 0=easy, 1=normal, 2=hard (easy like 15x15, normal = 30x30, hard =50x50)
     public WSS(int difficulty) {
@@ -39,12 +37,13 @@ public class WSS {
         this.turnCount = 0;
     }
 
-    // public void init() {
-    //     generateMap(difficulty);
-    //     Position start = new Position(0, map.getHeight() / 2);
-    //     // Brain/Vision placeholders, nulls for now
-    //     player = new Player(start, null, null);
-    // }
+    /// check if acc used anywhere ///////////////////////////////////////////////////////////////////////////
+    public void init() {
+        weatherSystem = new WeatherSystem();
+        Position start = new Position(0, map.getHeight() / 2);
+        // // Brain/Vision placeholders, nulls for now
+        // player = new Player(start, null, null);
+    }
 
     public void generateMap(int mapSize) {
         // difficulty derived from size; <20 = easy, <40=normal, else hard
@@ -61,6 +60,7 @@ public class WSS {
         System.out.print("Enter map size (e.g. 15, 30, 50): ");
         int size = sc.nextInt();
         generateMap(size);
+        weatherSystem = new WeatherSystem();
         Position start = new Position(0, map.getHeight() / 2);
         player = new Player(start, null, null);
         sc.close();
@@ -91,29 +91,25 @@ public class WSS {
 
         boolean moving = (targetTile != null); 
 
-        //Apply weather stat modification
-        //################################## # #
-        // WeatherSystem.progressWeather() placeholder; need to figure out weather sys
-        // double weatherFoodMod = weatherSystem.getFoodMod();
-        // double weatherWaterMod = weatherSystem.getWaterMod();
-        ///############################
+        //Apply weather stat modification; Tick weather and apply stat modifiers this turn
+        weatherSystem.tick();
+        double weatherFoodMod  = weatherSystem.getFoodMod();
+        double weatherWaterMod = weatherSystem.getWaterMod();
+        System.out.println(weatherSystem);
 
         if (moving) {
             // Update player location
             player.makeMove(targetTile);
             // Get tile stat modification
             Tile current = map.getTile(player.getPosition());
-            if (current != null) {
-                player.applyTileCost(current);
-            }
+            if (current != null) player.applyTileCost(current, weatherFoodMod, weatherWaterMod, weatherSystem.getAffectedTerrain());
         } else {
             // resting: regain 2 movement, half food/water cost
-+            player.rest();
+            player.rest();
             Tile current = map.getTile(player.getPosition());
-            if (current != null) {
-                player.applyHalfTileCost(current);
-            }
+            if (current != null) player.applyHalfTileCost(current, weatherFoodMod, weatherWaterMod, weatherSystem.getAffectedTerrain());
         }
+        
 
         //print stats
         printPlayerStats();
@@ -143,12 +139,6 @@ public class WSS {
 
         return true;
     }
-
-
-
-
-
-
 
 
     private void printPlayerStats() {

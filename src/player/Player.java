@@ -52,21 +52,27 @@ public class Player {
         if (currMovement < 0) currMovement = 0;
     }
 
+    
     // Full tile stat deduction on move
-    public void applyTileCost(Tile tile) {
-        currFood  -= tile.getFoodCost();
-        currWater -= tile.getWaterCost();
-        if (currFood  < 0) currFood  = 0;
-        if (currWater < 0) currWater = 0;
-    }
+    public void applyTileCost(Tile tile, double foodMod, double waterMod, String affectedTerrain) {
+            double terrainMod = tile.getTerrain().getType().equals(affectedTerrain) ? 1.3 : 1.0;
+            currFood  -= (int)(tile.getFoodCost()  * foodMod  * terrainMod);
+           currWater -= (int)(tile.getWaterCost() * waterMod * terrainMod);
+            if (currFood  < 0) currFood  = 0;
+            if (currWater < 0) currWater = 0;
+        }
 
     //half cost when staying on tile ; "resting"
-    public void applyHalfTileCost(Tile tile) {
-        currFood  -= tile.getFoodCost()  / 2;
-        currWater -= tile.getWaterCost() / 2;
-        if (currFood  < 0) currFood  = 0;
-        if (currWater < 0) currWater = 0;
-    }
+        public void applyHalfTileCost(Tile tile, double foodMod, double waterMod, String affectedTerrain) {
+           double terrainMod = tile.getTerrain().getType().equals(affectedTerrain) ? 1.3 : 1.0;
+            currFood  -= (int)(tile.getFoodCost()  / 2.0 * foodMod  * terrainMod);
+            currWater -= (int)(tile.getWaterCost() / 2.0 * waterMod * terrainMod);
+            if (currFood  < 0) currFood  = 0;
+            if (currWater < 0) currWater = 0;
+        }
+
+
+    
 
     public void addFood(int amount) {
         currFood = Math.min(maxFood, Math.max(0, currFood + amount));

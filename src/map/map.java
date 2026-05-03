@@ -4,10 +4,8 @@ import java.util.Random;
 
 import event.Event;
 import event.GoldBonus;
-import event.WaterBonus;
-import map.terrain.Plain;
-import map.terrain.Terrain;
-import event.FoodBonus;
+import map.terrain.*;
+import event.*;
 import event.GenerousTrader;
 import event.GreedyTrader;
 
@@ -50,9 +48,14 @@ public class Map {
     }
 
     private Terrain randomTerrain() {
-        // Only Plain implemented; other terrain subclasses to b made
-        // TODO: add Mountain, Desert, Swamp, Forest and randomize it
-        return new Plain();
+        int roll = rng.nextInt(5);
+        switch (roll) {
+            case 1: return new Mountain(); // placeholder until Mountain.java built
+            case 2: return new Desert();   // placeholder until Desert.java built
+            case 3: return new Swamp();    // placeholder until Swamp.java built
+            case 4: return new Forest();   // placeholder until Forest.java built
+            default: return new Plain();
+        }
     }
 
     //how to acc set the events to each 
@@ -85,7 +88,7 @@ public class Map {
 
     //event picked randomly, 1 of 4 //TODO: need to add in food bonus
     private Event randomEvent() {
-        int roll = rng.nextInt(3);
+        int roll = rng.nextInt(4);
         switch (roll) {
             case 0:
                 // GoldBonus ; 1-time
@@ -96,12 +99,14 @@ public class Map {
                 // GenerousTrader/GreedyTrader ; pick randomly
                 boolean generous = rng.nextBoolean();
                 return generous ? new GenerousTrader() : new GreedyTrader();
+            case 2:
+                //WaterBonus placeholder, repeatable
+                // return new WaterBonus(0.8 + rng.nextDouble() * 0.8, 10);
+                return new GoldBonus(1.0, 5); // temp, need to acc implement
             default:
-                // WaterBonus placeholder ; TODO, repeatable
-                ////////////////////////////////////////////////////////////////////////
-                // implement water bonus
-                double goldMult2 = 1.0;
-                return new GoldBonus(goldMult2, 5); // temp
+                //FoodBonus placeholder, repeatable
+                // return new FoodBonus(0.8 + rng.nextDouble() * 0.8, 10);
+                return new GoldBonus(1.0, 5); // temp, need to acc implement
         }
     }
 

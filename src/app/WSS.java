@@ -29,6 +29,8 @@ public class WSS {
     private Player player;
     private Map map;  //need to build out
     
+    ///////////////////////////////////////////////////////////////////////////
+    // need to properly implement WeatherSystme
     private Object weatherSystem; // WeatherSystem placeholder
 
     // difficulty: 0=easy, 1=normal, 2=hard (easy like 15x15, normal = 30x30, hard =50x50)
@@ -61,8 +63,8 @@ public class WSS {
         generateMap(size);
         Position start = new Position(0, map.getHeight() / 2);
         player = new Player(start, null, null);
-        // init() replaced by inline setup
-//  above
+        sc.close();
+        // init() replaced by inline setup above
         while (true) {
             boolean alive = takeTurn();
             if (!alive) {

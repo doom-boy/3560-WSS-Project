@@ -8,6 +8,8 @@ public class Mountain extends Terrain {
         this.visibilityBenefit = 2;
     }
 
+    //////////////////////////////////////////////////////////////////
+    // need to implement this inside Vision 
     public int getVisibilityBenefit() {
         return visibilityBenefit;
     }

@@ -46,10 +46,10 @@ public class Map {
     private Terrain randomTerrain() {
         int roll = rng.nextInt(5);
         switch (roll) {
-            case 1: return new Mountain(); // placeholder until Mountain.java built
-            case 2: return new Desert();   // placeholder until Desert.java built
-            case 3: return new Swamp();    // placeholder until Swamp.java built
-            case 4: return new Forest();   // placeholder until Forest.java built
+            case 1: return new Mountain(); 
+            case 2: return new Desert();
+            case 3: return new Swamp();
+            case 4: return new Forest();
             default: return new Plain();
         }
     }

@@ -1,6 +1,23 @@
 package logic.brain;
 
+import java.util.List;
+
+import map.Tile;
+
 public class Brain {
+
+    private List<Tile> path;
+    private Tile target;
+
+
+    public Brain() {}
+
+    public Tile decideMove() {
+        return null;
+    }
+
+    
+
     
 }
 

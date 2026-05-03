@@ -2,12 +2,8 @@ package map;
 
 import java.util.Random;
 
-import event.Event;
-import event.GoldBonus;
 import map.terrain.*;
 import event.*;
-import event.GenerousTrader;
-import event.GreedyTrader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,13 +96,15 @@ public class Map {
                 boolean generous = rng.nextBoolean();
                 return generous ? new GenerousTrader() : new GreedyTrader();
             case 2:
-                //WaterBonus placeholder, repeatable
+                //WaterBonus, repeatable
                 // return new WaterBonus(0.8 + rng.nextDouble() * 0.8, 10);
-                return new GoldBonus(1.0, 5); // temp, need to acc implement
+                double waterMult = 0.8 + rng.nextDouble() * 0.8;
++                return new WaterBonus(waterMult, 10);
             default:
-                //FoodBonus placeholder, repeatable
+                //FoodBonus, repeatable
                 // return new FoodBonus(0.8 + rng.nextDouble() * 0.8, 10);
-                return new GoldBonus(1.0, 5); // temp, need to acc implement
+                double foodMult = 0.8 + rng.nextDouble() * 0.8;
++                return new FoodBonus(foodMult, 10);
         }
     }
 

@@ -12,13 +12,13 @@ import map.Tile;
 
 
 public class Player {
-    private int maxMovement;
-    private int maxFood;
-    private int maxWater;
-    private int currMovement;
-    private int currFood;
-    private int currWater;
-    private int currGold;
+    protected int maxMovement;
+    protected int maxFood;
+    protected int maxWater;
+    protected int currMovement;
+    protected int currFood;
+    protected int currWater;
+    protected int currGold;
     private Position position;
 
     // Vision/Brain placeholders
@@ -63,7 +63,7 @@ public class Player {
         }
 
     //half cost when staying on tile ; "resting"
-        public void applyHalfTileCost(Tile tile, double foodMod, double waterMod, String affectedTerrain) {
+    public void applyHalfTileCost(Tile tile, double foodMod, double waterMod, String affectedTerrain) {
            double terrainMod = tile.getTerrain().getType().equals(affectedTerrain) ? 1.3 : 1.0;
             currFood  -= (int)(tile.getFoodCost()  / 2.0 * foodMod  * terrainMod);
             currWater -= (int)(tile.getWaterCost() / 2.0 * waterMod * terrainMod);

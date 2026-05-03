@@ -13,34 +13,42 @@ public class GenerousTrader extends Trader {
     }
 
 
-    ///////////////////////////////////////////////////////////
-    //initial trade option, need to change si offers other stuff
+    
     @Override
-    public int[] showTradeOption() {
-        // Offers food; wants gold
-        int foodOffer = (int)(10 * OFFER_BONUS);
-        int goldAsk   = (int)(5  * ASK_DISCOUNT);
-        // [give_food, give_water, give_gold] from trader's side
-        return new int[]{foodOffer, 0, -goldAsk};
+    protected double getOfferMultiplier()  {
+        return OFFER_BONUS; 
     }
 
-
-    // prob need to remake ts
     @Override
-    public int[] makeOffer(int[] playerOffer) {
-        // Generous trader accepts most reasonable offers
-        int playerGold = playerOffer[2];
-        if (playerGold >= 3) {
-            // Accept
-            return new int[]{0}; // 0 = accept
-        }
-        // counteroffer: ask for slightly more
-        int[] counter = playerOffer.clone();
-        counter[2] = playerGold + 1;
-        return new int[]{1, counter[0], counter[1], counter[2]}; // 1 = counteroffer
+    protected double getDemandMultiplier() { 
+        return ASK_DISCOUNT; 
+    }
 
-        //patience trigger
-        
+    @Override
+    protected boolean offerAcceptable(int[] o) {
+        if (patience <= 0) return false;
+        // Check each give/get pair against base rate * discount
+        for (int g = 0; g < 3; g++) {
+            for (int r = 0; r < 3; r++) {
+                if (g == r || o[g] == 0) continue;
+                double expected = BASE_RATES[g][r] * o[g] * ASK_DISCOUNT;
+                if (o[3 + r] >= expected) return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    protected int[] counterOffer(int[] o) {
+        int[] counter = o.clone();
+        for (int g = 0; g < 3; g++) {
+            for (int r = 0; r < 3; r++) {
+                if (g == r || o[g] == 0) continue;
+                int needed = (int) Math.ceil(BASE_RATES[g][r] * o[g] * ASK_DISCOUNT);
+                counter[3 + r] = Math.max(o[3 + r], needed);
+            }
+        }
+        return new int[]{1, counter[0], counter[1], counter[2], counter[3], counter[4], counter[5]};
     }
 
     @Override

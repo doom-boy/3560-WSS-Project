@@ -1,5 +1,4 @@
 package app;
-// main.java
 
 import map.Map;
 import map.Position;
@@ -32,18 +31,11 @@ public class WSS {
     private WeatherSystem weatherSystem;
 
     // difficulty: 0=easy, 1=normal, 2=hard (easy like 15x15, normal = 30x30, hard =50x50)
-    public WSS(int difficulty) {
-        this.difficulty = difficulty;
+    public WSS() {
+        this.difficulty = 1; //set as default until map is generated & overwritten
         this.turnCount = 0;
     }
 
-    /// check if acc used anywhere ///////////////////////////////////////////////////////////////////////////
-    public void init() {
-        weatherSystem = new WeatherSystem();
-        Position start = new Position(0, map.getHeight() / 2);
-        // // Brain/Vision placeholders, nulls for now
-        // player = new Player(start, null, null);
-    }
 
     public void generateMap(int mapSize) {
         // difficulty derived from size; <20 = easy, <40=normal, else hard
@@ -63,8 +55,7 @@ public class WSS {
         weatherSystem = new WeatherSystem();
         Position start = new Position(0, map.getHeight() / 2);
         player = new Player(start, null, null);
-        sc.close();
-        // init() replaced by inline setup above
+
         while (true) {
             boolean alive = takeTurn();
             if (!alive) {
@@ -76,6 +67,8 @@ public class WSS {
                 break;
             }
         }
+        
+        sc.close();
     }
 
     //returns false if player dies this turn (food or water < 0)
@@ -88,7 +81,7 @@ public class WSS {
         // placeholder - Brain.decideMove() ; implement later
         //######################
         Tile targetTile = null; // Brain returns this, return curr tile even if staying; need to wipe to null after decision act
-
+        // always resting until Brain is implemented
         boolean moving = (targetTile != null); 
 
         //Apply weather stat modification; Tick weather and apply stat modifiers this turn
@@ -152,8 +145,7 @@ public class WSS {
 
 
     public static void main(String[] args) {
-        int difficulty = 1; // normal
-        new WSS(difficulty).run();
+        new WSS().run();
     }
 
 

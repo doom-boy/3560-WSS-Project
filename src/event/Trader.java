@@ -17,13 +17,11 @@ import player.Player;
  * Greedy trader is opposite. 
  * 
  * 
- */
-
-/**
  * Player can't know what type of trader it is
- * might want to have patience slowly regenerate after amt of turns have passed, maybe stock too but at a slow rate
+ * patience slowly regenerate after amt of turns have passed
  * 
  */
+
 
 public abstract class Trader extends Event {
 

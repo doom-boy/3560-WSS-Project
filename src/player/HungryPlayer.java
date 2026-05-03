@@ -13,5 +13,7 @@ public class HungryPlayer extends Player {
         // water and movement unchanged
     }
 
-    public String getType() { return type; }
+    public String getType() {
+        return type;
+    }
 }

@@ -5,8 +5,7 @@ import map.Tile;
 // need tile, vision, brain
 
 /**
- * Correction:
- *  make movement generation a slow recover process, regain 2 per "rest", not full regain
+ *  movement generation: regain 2 per "rest"
  * 
  *  */
 
@@ -21,6 +20,7 @@ public class Player {
     protected int currGold;
     private Position position;
 
+    ////////////////////////////////////////////////////////////////////
     // Vision/Brain placeholders
     private Object vision; 
     private Object brain;  

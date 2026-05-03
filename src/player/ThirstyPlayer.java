@@ -12,5 +12,7 @@ public class ThirstyPlayer extends Player {
         this.currWater = 70;
     }
 
-    public String getType() { return type; }
+    public String getType() {
+        return type;
+    }
 }

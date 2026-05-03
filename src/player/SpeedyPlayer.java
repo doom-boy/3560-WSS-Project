@@ -16,5 +16,7 @@ public class SpeedyPlayer extends Player {
         this.currWater = 80;
     }
 
-    public String getType() { return type; }
+    public String getType() {
+        return type;
+    }
 }

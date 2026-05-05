@@ -4,10 +4,22 @@ import map.Map;
 import map.Position;
 import map.Tile;
 import map.WeatherSystem;
+import player.HungryPlayer;
 import player.Player;
+import player.SpeedyPlayer;
+import player.ThirstyPlayer;
+import logic.*;
 import logic.brain.Brain;
+import logic.brain.Careful;
+import logic.brain.Determined;
+import logic.brain.Hoarder;
+import logic.vision.Cautious;
+import logic.vision.Farsight;
+import logic.vision.Focused;
+import logic.vision.KeenEye;
 import logic.vision.Vision;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import event.Event;
@@ -54,6 +66,9 @@ public class WSS {
         generateMap(size);
         weatherSystem = new WeatherSystem();
         Position start = new Position(0, map.getHeight() / 2);
+        Vision vision = selectVision(sc);
+        Brain brain   = selectBrain(sc, vision);
+        Player player = selectPlayer(sc, start, brain, vision);
         player = new Player(start, null, null);
 
         while (true) {
@@ -75,14 +90,8 @@ public class WSS {
     public boolean takeTurn() {
         turnCount++;
         System.out.println("\n--- Turn " + turnCount + " ---");
-
-        // Brain decides next move
-        //#############################
-        // placeholder - Brain.decideMove() ; implement later
-        //######################
-        Tile targetTile = null; // Brain returns this, return curr tile even if staying; need to wipe to null after decision act
-        // always resting until Brain is implemented
-        boolean moving = (targetTile != null); 
+        Tile targetTile = player.getBrain().decideMove(player, map);
+        boolean moving  = (targetTile != null);
 
         //Apply weather stat modification; Tick weather and apply stat modifiers this turn
         weatherSystem.tick();
@@ -122,7 +131,7 @@ public class WSS {
         if (tile != null && tile.getEvent() != null) {
             Event event = tile.getEvent();
             if (event.isAvailable()) {
-                boolean interact = true; // Brain.considerEvent() will decide
+                boolean interact = player.getBrain().considerEvent(player, tile);
                 if (interact) {
                     event.trigger(player);
                     if (!event.isRepeating()) event.setEncountered(true);
@@ -132,6 +141,46 @@ public class WSS {
 
         return true;
     }
+
+
+    //for logic stuff
+
+    private Vision selectVision(Scanner sc) {
+        System.out.println("Select Vision: 1=Focused  2=Cautious  3=KeenEye  4=Farsight  5=Random");
+        int v = sc.nextInt();
+        if (v == 5) v = new Random().nextInt(4) + 1;
+        switch (v) {
+            case 1: return new Focused();
+            case 2: return new Cautious();
+            case 3: return new KeenEye();
+            case 4: return new Farsight();
+            default: return new KeenEye();
+        }
+    }
+
+    private Brain selectBrain(Scanner sc, Vision vision) {
+        System.out.println("Select Brain:  1=Careful  2=Determined  3=Hoarder  4=Random");
+        int b = sc.nextInt();
+        if (b == 4) b = new Random().nextInt(3) + 1;
+        switch (b) {
+            case 1: return new Careful(vision);
+            case 2: return new Determined(vision);
+            case 3: return new Hoarder(vision);
+            default: return new Careful(vision);
+        }
+    }
+
+    private Player selectPlayer(Scanner sc, Position start, Brain brain, Vision vision) {
+        System.out.println("Select Player: 1=Default  2=Hungry  3=Thirsty  4=Speedy  5=Random");
+        int p = sc.nextInt();
+        if (p == 5) p = new Random().nextInt(4) + 1;
+        switch (p) {
+            case 2: return new HungryPlayer(start, vision, brain);
+            case 3: return new ThirstyPlayer(start, vision, brain);
+            case 4: return new SpeedyPlayer(start, vision, brain);
+            default: return new Player(start, vision, brain);
+        }
+    }    
 
 
     private void printPlayerStats() {

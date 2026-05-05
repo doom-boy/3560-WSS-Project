@@ -1,4 +1,6 @@
 package player;
+import logic.brain.Brain;
+import logic.vision.Vision;
 import map.Position;
 import map.Tile;
 
@@ -20,12 +22,10 @@ public class Player {
     protected int currGold;
     private Position position;
 
-    ////////////////////////////////////////////////////////////////////
-    // Vision/Brain placeholders
-    private Object vision; 
-    private Object brain;  
+    private Vision vision;
+    private Brain brain; 
 
-    public Player(Position startPos, Object vision, Object brain) {
+    public Player(Position startPos, Vision vision, Brain brain) {
         this.position = startPos;
         this.vision   = vision;
         this.brain    = brain;
@@ -115,6 +115,14 @@ public class Player {
     public int getCurrGold() { 
         return currGold; 
     }
+
+    public Brain getBrain() { 
+        return brain; 
+    }
+    public Vision getVision() { 
+        return vision; 
+    }
+
 
     // Setters for Brain tuning; if needed, can delete lateron
     public void setPosition(Position p) { 

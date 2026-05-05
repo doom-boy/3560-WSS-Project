@@ -1,12 +1,14 @@
 package player;
 
 import map.Position;
+import logic.vision.Vision;
+import logic.brain.Brain;
 
 // More movement per turn; tradeoff lower food n water max
 public class SpeedyPlayer extends Player {
     private String type = "SpeedyPlayer";
 
-    public SpeedyPlayer(Position startPos, Object vision, Object brain) {
+    public SpeedyPlayer(Position startPos, Vision vision, Brain brain) {
         super(startPos, vision, brain);
         this.maxMovement  = 5;  // extra movement
         this.currMovement = 5;

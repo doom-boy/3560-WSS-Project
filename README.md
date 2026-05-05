@@ -1,10 +1,8 @@
 # Wilderness Survival System Project
 
-## Members
-
 ## About The Project
 
--  brief summary stating what is finished in your project and what is not yet finished
+-  brief summary stating what is finished in your project and what is not yet finished (YES: all base requirements, program text output NOT: player assessing trade event properly, archetype balancing, more event tuning, mountain-specific visibility buff, GUI)
 - how OOD was used, how it was applied, how it helped
 - video or textual program output demonstrating program
 

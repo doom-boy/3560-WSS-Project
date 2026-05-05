@@ -8,14 +8,14 @@ import logic.brain.Brain;
 public class SpeedyPlayer extends Player {
     private String type = "SpeedyPlayer";
 
-    public SpeedyPlayer(Position startPos, Vision vision, Brain brain) {
-        super(startPos, vision, brain);
-        this.maxMovement  = 5;  // extra movement
-        this.currMovement = 5;
-        this.maxFood = 80;
-        this.currFood = 80;
-        this.maxWater = 80;
-        this.currWater = 80;
+    public SpeedyPlayer(Position startPos, Brain brain, Vision vision) {
+        super(startPos, brain, vision);
+        this.maxMovement  = 15;  // extra movement
+        this.currMovement = 15;
+        this.maxFood = 70;
+        this.currFood = 70;
+        this.maxWater = 70;
+        this.currWater = 70;
     }
 
     public String getType() {

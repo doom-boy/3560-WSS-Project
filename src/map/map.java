@@ -17,10 +17,10 @@ public class Map {
     private Random rng; // for generation randomness (terrain, event, etc)
 
     // Event tuning by difficulty [easy, normal, hard]
-    private static final int[] MIN_EVENTS = {2, 3, 4};
-    private static final int[] MAX_EVENTS = {4, 6, 10};
+    private static final int[] MIN_EVENTS = {10, 15, 20};
+    private static final int[] MAX_EVENTS = {100, 500, 1000};
     // Occurrence rate; chance per tile that event spawns, we can inverse this so less events, but doesn't seem fair for bigger map
-    private static final double[] EVENT_RATES = {0.15, 0.25, 0.40};
+    private static final double[] EVENT_RATES = {0.50, 0.70, 0.80};
 
 
 

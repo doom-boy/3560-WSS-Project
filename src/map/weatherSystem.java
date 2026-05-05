@@ -55,10 +55,10 @@ public class WeatherSystem {
      * The affected terrain type gets +1 cost, others stay normal.
      */
     public String getAffectedTerrain() {
-        if ( isHot && !isDry) return "Plain";
-        if ( isHot &&  isDry) return "Desert";
-        if (!isHot &&  isDry) return "Mountain";
-        return "Swamp"; // !hot && !dry
+        if ( isHot && !isDry) return "Spring"; // cost on plains
+        if ( isHot &&  isDry) return "Summer"; // const on deserts
+        if (!isHot &&  isDry) return "Winter"; // cost on mountain
+        return "Fall"; // !hot && !dry // cost on swamp
     }
 
     /** Water drain goes up when hot. */
@@ -72,9 +72,15 @@ public class WeatherSystem {
     }
 
     // Getters
-    public boolean isHot()      { return isHot; }
-    public boolean isDry()      { return isDry; }
-    public int getDuration()    { return duration; }
+    public boolean isHot() { 
+        return isHot; 
+    }
+    public boolean isDry() { 
+        return isDry; 
+    }
+    public int getDuration() { 
+        return duration; 
+    }
 
     @Override
     public String toString() {

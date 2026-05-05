@@ -8,7 +8,6 @@ import player.HungryPlayer;
 import player.Player;
 import player.SpeedyPlayer;
 import player.ThirstyPlayer;
-import logic.*;
 import logic.brain.Brain;
 import logic.brain.Careful;
 import logic.brain.Determined;
@@ -68,8 +67,7 @@ public class WSS {
         Position start = new Position(0, map.getHeight() / 2);
         Vision vision = selectVision(sc);
         Brain brain   = selectBrain(sc, vision);
-        Player player = selectPlayer(sc, start, brain, vision);
-        player = new Player(start, null, null);
+        this.player   = selectPlayer(sc, start, brain, vision);
 
         while (true) {
             boolean alive = takeTurn();
@@ -128,11 +126,15 @@ public class WSS {
         }
 
         //Get tile events; one event interaction per turn
-        if (tile != null && tile.getEvent() != null) {
+        System.out.println("checking event");
+        if (tile.getEvent() != null) { //tile != null && 
             Event event = tile.getEvent();
+            System.out.println("events exist");
             if (event.isAvailable()) {
+                System.out.println("trying interact");
                 boolean interact = player.getBrain().considerEvent(player, tile);
                 if (interact) {
+                    System.out.println("interacting!!!!");
                     event.trigger(player);
                     if (!event.isRepeating()) event.setEncountered(true);
                 }
@@ -175,10 +177,10 @@ public class WSS {
         int p = sc.nextInt();
         if (p == 5) p = new Random().nextInt(4) + 1;
         switch (p) {
-            case 2: return new HungryPlayer(start, vision, brain);
-            case 3: return new ThirstyPlayer(start, vision, brain);
-            case 4: return new SpeedyPlayer(start, vision, brain);
-            default: return new Player(start, vision, brain);
+            default: return new Player(start, brain, vision);
+            case 2: return new HungryPlayer(start, brain, vision);
+            case 3: return new ThirstyPlayer(start, brain, vision);
+            case 4: return new SpeedyPlayer(start, brain, vision);
         }
     }    
 

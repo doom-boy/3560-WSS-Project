@@ -25,13 +25,14 @@ public class Player {
     private Vision vision;
     private Brain brain; 
 
-    public Player(Position startPos, Vision vision, Brain brain) {
+    public Player(Position startPos, Brain brain, Vision vision) {
         this.position = startPos;
-        this.vision   = vision;
         this.brain    = brain;
+        this.vision   = vision;
+        
 
         // default stats; start @ max, gold @ 0
-        this.maxMovement  = 3;
+        this.maxMovement  = 6;
         this.maxFood      = 100;
         this.maxWater     = 100;
         this.currMovement = maxMovement;
